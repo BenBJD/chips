@@ -11,8 +11,20 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker buildx build . -t chips:$(date +%s)
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker buildx build . --file Dockerfile \
+          -t ghcr.io/benbjd/chips:latest
+          echo "done"
+          docker image push "ghcr.io/benbjd/bendit:latest"
