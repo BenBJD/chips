@@ -6,7 +6,7 @@ interface SetupProps {
 }
 
 const Setup = ({ playerId }: SetupProps) => {
-  const { sendJsonMessage } = useWebSocket("ws://localhost:8080", {
+  const { sendJsonMessage } = useWebSocket(import.meta.env.VITE_WEBSOCKET_URL, {
     share: true,
   })
 

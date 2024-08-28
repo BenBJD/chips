@@ -2,7 +2,7 @@ import useWebSocket from "react-use-websocket"
 import { Message } from "../types.ts"
 
 const ResetButton = () => {
-  const { sendJsonMessage } = useWebSocket("ws://localhost:8080", {
+  const { sendJsonMessage } = useWebSocket(import.meta.env.VITE_WEBSOCKET_URL, {
     share: true,
   })
 
