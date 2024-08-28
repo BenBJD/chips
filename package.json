@@ -1,0 +1,13 @@
+{
+  "name": "chips",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "workspaces": [
+    "packages/server",
+    "packages/client"
+  ],
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}
