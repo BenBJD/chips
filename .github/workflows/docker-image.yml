@@ -27,4 +27,4 @@ jobs:
           docker buildx build . --file Dockerfile \
           -t ghcr.io/benbjd/chips:latest
           echo "done"
-          docker image push "ghcr.io/benbjd/bendit:latest"
+          docker image push "ghcr.io/benbjd/chips:latest"
