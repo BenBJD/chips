@@ -1,18 +1,19 @@
-FROM node:22-alpine
+FROM node:22
 
-# Client
+EXPOSE 3000
+EXPOSE 8080
+
 WORKDIR /app
 
-COPY package.json .
+COPY package.json /app
+COPY package-lock.json /app
 
 RUN npm install
 
 RUN npm i -g serve
 
-COPY . .
+COPY . /app
 
 RUN npm run build -w client
 
-EXPOSE 3000
-
-CMD ["./run.sh" ]
+ENTRYPOINT ["./run.sh"]

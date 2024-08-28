@@ -1,5 +1,5 @@
 import { WebSocketServer } from "ws"
-const wss = new WebSocketServer({ port: 1981 })
+const wss = new WebSocketServer({ port: 8080 })
 console.log("Server started at ", wss.address())
 
 type Player = {
