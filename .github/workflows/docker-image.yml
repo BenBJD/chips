@@ -30,3 +30,12 @@ jobs:
           -t ghcr.io/benbjd/chips:latest
           echo "done"
           docker image push "ghcr.io/benbjd/chips:latest"
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy Stage
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'https://portainer.bjdhome.co.uk/api/webhooks/a7d43d78-f281-488c-a4fb-fdaa3480bf0e'
+        method: 'POST'
+    
