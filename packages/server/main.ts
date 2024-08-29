@@ -51,7 +51,7 @@ wss.on("connection", function connection(ws) {
         jsonData.data < gameState.players.length
       ) {
         const player = gameState.players[jsonData.data]
-        // Send player Id and state to joining player
+        // Send player ID and state to joining player
         ws.send(
           JSON.stringify({
             playerId: player.id,
@@ -156,42 +156,17 @@ wss.on("connection", function connection(ws) {
     if (jsonData.type === "bet") {
       const player = gameState.players[gameState.currentPlayer]
 
-      // Skip folded players
-      if (player.status !== "folded") {
-        gameState.currentPlayer =
-          (gameState.currentPlayer + 1) % gameState.players.length
-        wss.clients.forEach((client) => {
-          client.send(
-            JSON.stringify({
-              playerId: null,
-              gameState,
-            }),
-          )
-        })
-      }
-
       // Handle folding
-      if (jsonData.data == "fold") {
+      if (player.status === "folded" || jsonData.data === "fold") {
         player.status = "folded"
-        gameState.currentPlayer =
-          (gameState.currentPlayer + 1) % gameState.players.length
-        wss.clients.forEach((client) => {
-          client.send(
-            JSON.stringify({
-              playerId: null,
-              gameState,
-            }),
-          )
-        })
-        console.log("Player folded")
-        return
+      } else {
+        // Add the bet to the pot and subtract it from the player's balance
+        player.bet += jsonData.data
+        player.balance -= jsonData.data
       }
-
-      // Add the bet to the pot and subtract it from the player's balance
-      player.bet += jsonData.data
-      player.balance -= jsonData.data
 
       // If at last player and active players have the same bet, move to card flipping
+      // Otherwise, move to the next player
       const highestBet = Math.max(...gameState.players.map((p) => p.bet))
       if (
         gameState.currentPlayer === gameState.lastPlayer &&

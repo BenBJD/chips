@@ -7,7 +7,6 @@ import Voting from "./pages/Voting/Voting.tsx"
 import CardFlipping from "./pages/CardFlipping/CardFlipping.tsx"
 
 function App() {
-  console.log(import.meta.env.VITE_WEBSOCKET_URL)
   const { lastJsonMessage } = useWebSocket(import.meta.env.VITE_WEBSOCKET_URL, {
     share: true,
   })
