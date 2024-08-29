@@ -37,6 +37,12 @@ type Message = {
 
 wss.on("connection", function connection(ws) {
   console.log("connection established")
+  ws.send(
+    JSON.stringify({
+      playerId: null,
+      gameState,
+    }),
+  )
   ws.on("error", console.error)
 
   ws.on("message", function message(data) {
@@ -101,18 +107,6 @@ wss.on("connection", function connection(ws) {
     if (jsonData.type === "start") {
       // If there are not enough players, return
       if (gameState.players.length < 2) {
-        return
-      }
-      // If game has started, just send the current state
-      if (gameState.state !== "setup") {
-        wss.clients.forEach((client) => {
-          client.send(
-            JSON.stringify({
-              playerId: null,
-              gameState,
-            }),
-          )
-        })
         return
       }
       gameState.state = "betting"

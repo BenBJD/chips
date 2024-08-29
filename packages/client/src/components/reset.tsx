@@ -7,7 +7,7 @@ const ResetButton = () => {
   })
 
   const handleReset = () => {
-    sessionStorage.clear()
+    localStorage.clear()
     sendJsonMessage({ type: "end" } as Message)
   }
 

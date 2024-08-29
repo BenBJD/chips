@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { GameState, Message } from "../../types.ts"
 import useWebSocket from "react-use-websocket"
 
@@ -13,6 +13,16 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
   })
 
   const playerState = gameState.players[playerId]
+
+  useEffect(() => {
+    if (
+      playerState.status === "folded" &&
+      gameState.currentPlayer === playerId
+    ) {
+      console.log("folded so auto skipping for player", playerId)
+      sendJsonMessage({ type: "bet", data: "fold" } as Message)
+    }
+  }, [gameState])
 
   const [chipCounts, setChipCounts] = useState({
     red: { value: gameState.chipValues[0], count: 0 },

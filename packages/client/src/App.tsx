@@ -17,7 +17,7 @@ function App() {
 
   // Retrieve player ID from session storage
   useEffect(() => {
-    const storedPlayerId = sessionStorage.getItem("playerId")
+    const storedPlayerId = localStorage.getItem("playerId")
     if (storedPlayerId !== null) {
       setPlayerId(parseInt(storedPlayerId))
     }
@@ -25,14 +25,13 @@ function App() {
 
   // Listen for game state changes
   useEffect(() => {
-    console.log(lastJsonMessage)
     if (lastJsonMessage !== null) {
       setGameState((lastJsonMessage as WebSocketResponse).gameState)
       console.log(gameState)
       if ((lastJsonMessage as WebSocketResponse).playerId !== null) {
         setPlayerId((lastJsonMessage as WebSocketResponse).playerId as number)
         // Save player ID to session storage
-        sessionStorage.setItem(
+        localStorage.setItem(
           "playerId",
           (
             (lastJsonMessage as WebSocketResponse).playerId as number
