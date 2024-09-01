@@ -90,7 +90,7 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
 
   if (gameState.currentPlayer !== playerId) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex text-white flex-col items-center justify-center h-screen">
         <h2 className={"text-3xl mb-4 font-bold"}>
           Player {gameState.currentPlayer} is Betting
         </h2>
@@ -111,7 +111,7 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex text-white flex-col items-center justify-center h-screen">
       <div className="flex flex-col m-auto items-center justify-center">
         <h2 className={"text-4xl mb-6 font-bold"}>Your Turn</h2>
         <h3 className="text-2xl font-bold mb-4">

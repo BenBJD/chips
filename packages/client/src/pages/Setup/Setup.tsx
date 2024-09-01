@@ -16,7 +16,7 @@ const Setup = ({ playerId }: SetupProps) => {
 
   if (playerId !== null) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex text-white flex-col items-center justify-center h-screen">
         <h2 className="text-2xl font-bold mb-4">You are Player {playerId}</h2>
         <button
           onClick={() => sendJsonMessage({ type: "start" } as Message)}
@@ -29,7 +29,7 @@ const Setup = ({ playerId }: SetupProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex text-white flex-col items-center justify-center h-screen">
       <button
         onClick={handleJoin}
         className="bg-blue-500 hover:bg-blue-700 text-white text-4xl font-bold py-4 px-6 rounded"

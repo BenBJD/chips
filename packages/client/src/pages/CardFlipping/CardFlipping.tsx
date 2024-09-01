@@ -15,7 +15,7 @@ const CardFlipping = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen space-y-6">
+    <div className="flex flex-col text-white items-center justify-center h-screen space-y-6">
       <button
         onClick={handleNextRound}
         className="bg-blue-500 hover:bg-blue-700 text-white text-2xl font-bold py-4 px-6 rounded"
@@ -26,7 +26,7 @@ const CardFlipping = () => {
         onClick={handleEndGame}
         className="bg-red-500 hover:bg-red-700 text-white text-2xl font-bold py-4 px-6 rounded"
       >
-        Finish Game Finish
+        Finish Game
       </button>
     </div>
   )

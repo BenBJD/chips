@@ -17,7 +17,7 @@ const Voting = ({ gameState, playerId }: VotingProps) => {
 
   if (gameState.currentPlayer !== playerId) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col text-white items-center justify-center h-screen">
         <h1 className="text-2xl font-bold text-gray-500">
           It is not your turn to vote
         </h1>
@@ -25,7 +25,7 @@ const Voting = ({ gameState, playerId }: VotingProps) => {
     )
   } else {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col text-white items-center justify-center h-screen">
         <h1 className="text-3xl font-bold mb-4">Vote for the winner</h1>
         <div className="grid grid-cols-1 gap-4">
           {gameState.players.map((player) => (
