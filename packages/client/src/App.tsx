@@ -38,6 +38,12 @@ function App() {
           ).toString(),
         )
       }
+      if (
+        (lastJsonMessage as WebSocketResponse).gameState.players.length === 0
+      ) {
+        setPlayerId(null)
+        localStorage.removeItem("playerId")
+      }
     }
   }, [lastJsonMessage])
 

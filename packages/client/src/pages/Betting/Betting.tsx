@@ -91,71 +91,78 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
   if (gameState.currentPlayer !== playerId) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h2 className={"text-2xl mb-4 font-bold"}>
-          Current Player: {gameState.currentPlayer}
+        <h2 className={"text-3xl mb-4 font-bold"}>
+          Player {gameState.currentPlayer} is Betting
         </h2>
-        <h3 className="text-xl font-bold mb-4">
-          Your Balance: {playerState.balance}
+        <h3 className="text-2xl font-bold mb-4">
+          Balance: {playerState.balance}
         </h3>
         <h2 className="text-2xl font-bold mb-4">
-          Current Highest Bet:
+          Highest Bet:
           {" " +
             gameState.players.reduce(
               (acc, player) => Math.max(acc, player.bet),
               0,
             )}
         </h2>
-        <h3 className="text-xl font-bold mb-4">Your Bet: {playerState.bet}</h3>
+        <h3 className="text-2xl font-bold mb-4">Your Bet: {playerState.bet}</h3>
       </div>
     )
   }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <div className="w-full max-w-md">
-        <h2 className={"text-2xl mb-4 font-bold"}>
-          You are the current Player
-        </h2>
-        <h2 className="text-2xl font-bold mb-4">
-          Current Highest Bet:
-          {" " +
-            gameState.players.reduce(
-              (acc, player) => Math.max(acc, player.bet),
-              0,
-            )}
-        </h2>
-        <h3 className="text-xl font-bold mb-4">Your Bet: {playerState.bet}</h3>
-        <h3 className="text-xl font-bold mb-4">
-          What you are adding to your bet: {addedBet}
+      <div className="flex flex-col m-auto items-center justify-center">
+        <h2 className={"text-4xl mb-6 font-bold"}>Your Turn</h2>
+        <h3 className="text-2xl font-bold mb-4">
+          Balance: <b>{playerState.balance}</b>
         </h3>
-        <h3 className="text-xl font-bold mb-4">
-          Your Balance: {playerState.balance}
+        <h2 className="text-2xl font-bold mb-10">
+          Bet To Match:
+          <b>
+            {" " +
+              gameState.players.reduce(
+                (acc, player) => Math.max(acc, player.bet),
+                0,
+              )}
+          </b>
+        </h2>
+        <h3 className="text-2xl font-bold mb-4">
+          Previous Bet: <b>{playerState.bet}</b>
         </h3>
-        <div className={"flex space-x-2"}>
+        <h3 className="text-2xl font-bold mb-4">
+          Raise: <b>{addedBet}</b>
+        </h3>
+        <div className={"flex space-x-4 m-3"}>
           <button
             onClick={handleFold}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4"
-            disabled={gameState.currentPlayer !== playerId}
+            className="bg-red-500 hover:bg-red-700 text-white text-2xl font-bold py-2 px-4 rounded mb-4"
           >
             Fold
           </button>
           <button
             onClick={handleSubmitBet}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4"
-            disabled={gameState.currentPlayer !== playerId}
+            className="bg-green-500 hover:bg-green-700 text-white text-2xl font-bold py-2 px-4 rounded mb-4"
           >
-            Submit Bet
+            Bet
           </button>
         </div>
-        <div className="flex-col space-y-4">
+        <div className="flex-col flex space-y-4 items-center justify-center">
+          <h3 className="text-2xl font-bold mb-2">Add Chips</h3>
           {Object.entries(chipCounts).map(([color, data]) => (
-            <div key={color} className="flex items-center">
+            <div key={color} className="flex items-center space-x-4">
               <div
-                className={`w-8 h-8 rounded-full bg-${color}-500`}
+                className={`w-16 h-16 rounded-full bg-${color}-500`}
                 style={{ backgroundColor: color }}
               />
-              <span className="mx-2">Worth: {data.value}</span>
-              <span className="mx-2">Adding: {data.count}</span>
+              <div className={"flex m-1 flex-col items-center justify-center"}>
+                <h3>Value</h3>
+                <h3 className="text-2xl font-bold">{data.value}</h3>
+              </div>
+              <div className={"flex m-1 flex-col items-center justify-center"}>
+                <h3>Adding</h3>
+                <h3 className="text-2xl font-bold">{data.count}</h3>
+              </div>
               <button
                 onClick={() =>
                   handleChipChange(
@@ -163,7 +170,7 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
                     1,
                   )
                 }
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white text-4xl font-bold p-3 rounded-2xl"
               >
                 +
               </button>
@@ -174,7 +181,7 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
                     -1,
                   )
                 }
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold text-4xl p-3 rounded-2xl"
                 disabled={data.count === 0}
               >
                 -

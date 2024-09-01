@@ -15,18 +15,18 @@ const CardFlipping = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen space-y-6">
       <button
         onClick={handleNextRound}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
+        className="bg-blue-500 hover:bg-blue-700 text-white text-2xl font-bold py-4 px-6 rounded"
       >
-        Go to next round
+        Restart Betting
       </button>
       <button
         onClick={handleEndGame}
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4"
+        className="bg-red-500 hover:bg-red-700 text-white text-2xl font-bold py-4 px-6 rounded"
       >
-        End game
+        Finish Game Finish
       </button>
     </div>
   )
