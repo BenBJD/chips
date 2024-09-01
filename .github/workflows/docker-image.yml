@@ -34,7 +34,7 @@ jobs:
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'https://portainer.bjdhome.co.uk/api/webhooks/a7d43d78-f281-488c-a4fb-fdaa3480bf0e'
-          method: 'get'
+          url: 'https://portainer.bjdhome.co.uk/api/webhooks/2ff564b9-d4dc-40d4-b3aa-9652457b519a'
+          method: 'post'
           preventFailureOnNoResponse: 'true'
     
