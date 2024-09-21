@@ -113,12 +113,9 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
   return (
     <div className="flex text-white flex-col items-center justify-center h-screen">
       <div className="flex flex-col m-auto items-center justify-center">
-        <h2 className={"text-4xl mb-6 font-bold"}>Your Turn</h2>
-        <h3 className="text-2xl font-bold mb-4">
-          Balance: <b>{playerState.balance}</b>
-        </h3>
-        <h2 className="text-2xl font-bold mb-10">
-          Bet To Match:
+        <h2 className={"text-3xl mb-3 font-bold"}>Make a Bet</h2>
+        <h2 className="text-2xl font-bold mb-2">
+          To Match:
           <b>
             {" " +
               gameState.players.reduce(
@@ -127,32 +124,57 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
               )}
           </b>
         </h2>
-        <h3 className="text-2xl font-bold mb-4">
-          Previous Bet: <b>{playerState.bet}</b>
+        <h3
+          className={
+            "text-2xl font-bold mb-4" +
+            (playerState.bet <
+            gameState.players.reduce(
+              (acc, player) => Math.max(acc, player.bet),
+              0,
+            )
+              ? " text-red-500"
+              : "")
+          }
+        >
+          Your Bet: <b>{playerState.bet}</b>
         </h3>
-        <h3 className="text-2xl font-bold mb-4">
-          Raise: <b>{addedBet}</b>
+        <h3 className="text-xl font-bold mb-2">
+          Balance: <b>{playerState.balance}</b>
         </h3>
-        <div className={"flex space-x-4 m-3"}>
+        <h3 className="text-2xl font-bold mb-2">
+          Call: <b>{addedBet}</b>
+        </h3>
+        <div className={"flex space-x-8 m-2"}>
           <button
             onClick={handleFold}
-            className="bg-red-500 hover:bg-red-700 text-white text-2xl font-bold py-2 px-4 rounded mb-4"
+            className="bg-red-500 hover:bg-red-700 text-white text-3xl font-bold py-2 px-4 rounded mb-4"
           >
             Fold
           </button>
           <button
             onClick={handleSubmitBet}
-            className="bg-green-500 hover:bg-green-700 text-white text-2xl font-bold py-2 px-4 rounded mb-4"
+            className="bg-green-500 hover:bg-green-700 text-white text-3xl font-bold py-2 px-4 rounded mb-4"
           >
-            Bet
+            {playerState.bet + addedBet ===
+            gameState.players.reduce(
+              (acc, player) => Math.max(acc, player.bet),
+              0,
+            )
+              ? "Check"
+              : playerState.bet + addedBet <
+                  gameState.players.reduce(
+                    (acc, player) => Math.max(acc, player.bet),
+                    0,
+                  )
+                ? "Add to Match"
+                : "Raise"}
           </button>
         </div>
         <div className="flex-col flex space-y-4 items-center justify-center">
-          <h3 className="text-2xl font-bold mb-2">Add Chips</h3>
           {Object.entries(chipCounts).map(([color, data]) => (
             <div key={color} className="flex items-center space-x-4">
               <div
-                className={`w-16 h-16 rounded-full bg-${color}-500`}
+                className={`w-10 h-10 rounded-full bg-${color}-500`}
                 style={{ backgroundColor: color }}
               />
               <div className={"flex m-1 flex-col items-center justify-center"}>
@@ -167,24 +189,24 @@ const Betting = ({ gameState, playerId }: BettingProps) => {
                 onClick={() =>
                   handleChipChange(
                     color as "red" | "blue" | "green" | "black" | "yellow",
-                    1,
+                    -1,
                   )
                 }
-                className="bg-blue-500 hover:bg-blue-700 text-white text-4xl font-bold p-3 rounded-2xl"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold text-4xl py-3 px-6 rounded-2xl"
+                disabled={data.count === 0}
               >
-                +
+                -
               </button>
               <button
                 onClick={() =>
                   handleChipChange(
                     color as "red" | "blue" | "green" | "black" | "yellow",
-                    -1,
+                    1,
                   )
                 }
-                className="bg-red-500 hover:bg-red-700 text-white font-bold text-4xl p-3 rounded-2xl"
-                disabled={data.count === 0}
+                className="bg-blue-500 hover:bg-blue-700 text-white text-4xl font-bold py-3 px-5 rounded-2xl"
               >
-                -
+                +
               </button>
             </div>
           ))}

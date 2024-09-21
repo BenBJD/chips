@@ -26,13 +26,13 @@ const Voting = ({ gameState, playerId }: VotingProps) => {
   } else {
     return (
       <div className="flex flex-col text-white items-center justify-center h-screen">
-        <h1 className="text-3xl font-bold mb-4">Vote for the winner</h1>
-        <div className="grid grid-cols-1 gap-4">
+        <h1 className="text-3xl font-bold mb-10">Vote for the winner</h1>
+        <div className="grid grid-cols-1 gap-8">
           {gameState.players.map((player) => (
             <button
               key={player.id}
               onClick={() => handleVote(player.id)}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold font-xl py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 text-white text-2xl font-bold font-xl py-4 px-5 rounded"
             >
               {player.name}
             </button>
